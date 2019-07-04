@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">AndroidCourseProject</string>
+    <string name="app_name">Погода</string>
+    <string name="restart">onRestart()</string>
+    <string name="resume">onResume()</string>
+    <string name="create">onCreate()</string>
+    <string name="pause">onPause()</string>
+    <string name="stop">onStop()</string>
+    <string name="destroy">onDestroy()</string>
+    <string name="start">onStart()</string>
+    <string name="lifecycle">lifeCycle</string>
+    <string name="click">onClick()</string>
 </resources>

@@ -19,35 +19,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="@dimen/ConstrVBias" />
+        app:layout_constraintVertical_bias="@dimen/ConstrVBias"
+        android:maxWidth="@dimen/maxTextWidth"
+        android:gravity="center"/>
 
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/weatherMainLayout"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/base"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="@dimen/large_margin"-->
-<!--        >-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/temperature"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/temperatureFiller"-->
-<!--            android:textSize="40sp" -->
-<!--            android:layout_gravity="center"/>-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_launcher_foreground"-->
-<!--            />-->
-<!--        -->
-<!--    </LinearLayout>-->
 
     <TextView
         android:id="@+id/weatherMain"
@@ -62,6 +37,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/base" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/changeCityBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/changeCity"/>
 
     <!--        <TextView-->
 <!--            android:id="@+id/life_cycle"-->

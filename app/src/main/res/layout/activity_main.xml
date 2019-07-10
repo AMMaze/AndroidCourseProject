@@ -11,22 +11,50 @@
         android:id="@+id/base"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
         android:layout_margin="@dimen/small_margin"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/default_padding"
-        android:textSize="@dimen/text_size"
+        android:text="@string/weatherIn"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="@dimen/ConstrVBias"
+        android:maxWidth="@dimen/maxTextWidth"
+        android:gravity="center"/>
+
 
     <TextView
-        android:id="@+id/life_cycle"
+        android:id="@+id/weatherMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
-        android:padding="@dimen/default_padding"
-        app:layout_constraintLeft_toLeftOf="@+id/base"
-        app:layout_constraintTop_toBottomOf="@+id/base"/>
+        android:layout_marginTop="@dimen/large_margin"
+        android:text="@string/temperatureFiller"
+        android:drawableRight="@drawable/ic_sun_sunny_temperature_weather_icon"
+        android:drawableEnd="@drawable/ic_sun_sunny_temperature_weather_icon"
+        android:textSize="@dimen/large_text"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/base" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/changeCityBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/changeCity"/>
+
+    <!--        <TextView-->
+<!--            android:id="@+id/life_cycle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/small_margin"-->
+<!--            android:padding="@dimen/default_padding"-->
+<!--            app:layout_constraintLeft_toLeftOf="@+id/base"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/base"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

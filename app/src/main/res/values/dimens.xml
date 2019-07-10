@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    Margins-->
     <dimen name="h_margin">16dp</dimen>
     <dimen name="v_margin">16dp</dimen>
     <dimen name="small_margin">16dp</dimen>
+    <dimen name="large_margin">56dp</dimen>
+    <dimen name="Large_margin">70dp</dimen>
+
+<!--    Text-->
     <dimen name="text_size">18sp</dimen>
+    <dimen name="large_text">26sp</dimen>
+
+<!--    Padding-->
     <dimen name="default_padding">10dp</dimen>
+
+<!--    Constraints-->
+    <dimen name="ConstrVBias">0.3</dimen>
+
+<!--    width-->
+    <dimen name="maxTextWidth">350dp</dimen>
 </resources>

@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="default_btn">
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:layout_marginTop">@dimen/large_margin</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="rounded_btn">
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:layout_marginTop">@dimen/large_margin</item>
+        <item name="android:background">@drawable/btn_rounded</item>
+    </style>
+
+    <style name="default_text">
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_shadows">
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

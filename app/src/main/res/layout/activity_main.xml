@@ -7,21 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/leaves"
+        android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/base"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
         android:text="@string/weatherIn"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/large_text"
+        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="@dimen/ConstrVBias"
         android:maxWidth="@dimen/maxTextWidth"
-        android:gravity="center"/>
+        style="@style/tv_shadows"/>
 
 
     <TextView
@@ -32,11 +37,10 @@
         android:text="@string/temperatureFiller"
         android:drawableRight="@drawable/ic_sun_sunny_temperature_weather_icon"
         android:drawableEnd="@drawable/ic_sun_sunny_temperature_weather_icon"
-        android:textSize="@dimen/large_text"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base" />
+        app:layout_constraintTop_toBottomOf="@id/base"
+        style="@style/default_text"/>
 
 
     <Button
@@ -46,7 +50,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/changeCity"/>
+        android:text="@string/changeCity"
+        style="@style/default_btn"/>
 
     <!--        <TextView-->
 <!--            android:id="@+id/life_cycle"-->

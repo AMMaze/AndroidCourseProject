@@ -31,14 +31,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         setContentView(R.layout.activity_main);
-
         base = findViewById(R.id.base);
         base.setText(getString(R.string.weatherIn, city, country));
 
-//        lifeCycleLog = findViewById(R.id.life_cycle);
-//        lifeCycleLog.setText(getString(R.string.create));
-
-//        showMessage(this, getString(R.string.create));
         Log.i("lifeCycle", getString(R.string.create));
 
         Button changeCityBtn = findViewById(R.id.changeCityBtn);
@@ -90,59 +85,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onRestart() {
         super.onRestart();
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.restart);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.restart));
         Log.i(getString(R.string.lifecycle), getString(R.string.restart));
-
         base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.start);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.start));
         Log.i(getString(R.string.lifecycle), getString(R.string.start));
-
         base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.resume);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.resume));
         Log.i(getString(R.string.lifecycle), getString(R.string.resume));
-
         base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override
     protected void onPause() {
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.pause);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.pause));
         Log.i(getString(R.string.lifecycle), getString(R.string.pause));
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.stop);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.stop));
         Log.i(getString(R.string.lifecycle), getString(R.string.stop));
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-//        String str = lifeCycleLog.getText().toString() + "\n" + getString(R.string.destroy);
-//        lifeCycleLog.setText(str);
-//        showMessage(this, getString(R.string.destroy));
         Log.i(getString(R.string.lifecycle), getString(R.string.destroy));
         super.onDestroy();
     }

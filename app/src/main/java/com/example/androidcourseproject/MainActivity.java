@@ -1,7 +1,6 @@
 package com.example.androidcourseproject;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.androidcourseproject.grammar.RussianLangTools;
-import com.example.androidcourseproject.model.LocalParcel;
+import com.example.androidcourseproject.model.GeoData;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 //    private TextView lifeCycleLog;
@@ -58,7 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (data != null && data.getExtras() != null) {
-                LocalParcel receivedData = (LocalParcel) data.getExtras().get(RETURN_TAG_FROM_INPUT);
+                GeoData receivedData = (GeoData) data.getExtras().get(RETURN_TAG_FROM_INPUT);
 
                 if (receivedData != null) {
                     country = receivedData.getCountry();
@@ -71,13 +70,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(RETURN_TAG_FROM_RESTORE, new LocalParcel(country, city));
+        outState.putParcelable(RETURN_TAG_FROM_RESTORE, new GeoData(country, city));
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        LocalParcel parcel = savedInstanceState.getParcelable("saved");
+        GeoData parcel = savedInstanceState.getParcelable("saved");
         country = parcel.getCountry();
         city = parcel.getCity();
     }

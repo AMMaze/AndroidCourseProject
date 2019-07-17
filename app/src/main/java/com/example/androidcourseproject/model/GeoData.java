@@ -3,17 +3,17 @@ package com.example.androidcourseproject.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class LocalParcel implements Parcelable {
+public class GeoData implements Parcelable {
     private String country, city;
 
-    public LocalParcel (Parcel parcel) {
+    public GeoData(Parcel parcel) {
         String[] array = new String[2];
         parcel.readStringArray(array);
         country = array[0];
         city = array[1];
     }
 
-    public LocalParcel(String country, String city) {
+    public GeoData(String country, String city) {
         this.country = country;
         this.city = city;
     }
@@ -45,16 +45,16 @@ public class LocalParcel implements Parcelable {
     }
 
 
-    public static final Parcelable.Creator<LocalParcel> CREATOR = new Parcelable.Creator<LocalParcel>() {
+    public static final Parcelable.Creator<GeoData> CREATOR = new Parcelable.Creator<GeoData>() {
 
         @Override
-        public LocalParcel createFromParcel(Parcel source) {
-            return new LocalParcel(source);
+        public GeoData createFromParcel(Parcel source) {
+            return new GeoData(source);
         }
 
         @Override
-        public LocalParcel[] newArray(int size) {
-            return new LocalParcel[size];
+        public GeoData[] newArray(int size) {
+            return new GeoData[size];
         }
     };
 }

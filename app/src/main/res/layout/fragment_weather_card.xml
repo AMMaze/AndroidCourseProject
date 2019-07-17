@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view"
+        style="@style/CardViewStyle"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:text="@string/weatherIn"
+                android:textColor="@color/color_primary_light"
+                android:maxWidth="@dimen/maxTextWidth"
+                android:layout_centerHorizontal="true"
+                style="@style/TvShadows"/>
+
+
+            <TextView
+                android:id="@+id/weatherMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/temperatureFiller"
+                android:drawableRight="@drawable/ic_sun_sunny_temperature_weather_icon"
+                android:drawableEnd="@drawable/ic_sun_sunny_temperature_weather_icon"
+                android:layout_below="@id/base"
+                android:layout_centerHorizontal="true"
+                style="@style/DefaultText"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

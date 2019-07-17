@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="@dimen/ConstrVBias"
         android:maxWidth="@dimen/maxTextWidth"
-        style="@style/tv_shadows"/>
+        style="@style/TvShadows"/>
 
 
     <TextView
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/base"
-        style="@style/default_text"/>
+        style="@style/DefaultText"/>
 
 
     <Button

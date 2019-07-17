@@ -32,7 +32,7 @@
         android:layout_below="@+id/cityInput"
         android:layout_centerHorizontal="true"
         android:text="@string/submit"
-        style="@style/rounded_btn"/>
+        style="@style/RoundedBtn"/>
 
 
 </RelativeLayout>

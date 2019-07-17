@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
         android:text="@string/weatherIn"
-        android:textColor="@color/colorPrimaryLight"
+        android:textColor="@color/color_primary_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -51,7 +51,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/changeCity"
-        style="@style/default_btn"/>
+        style="@style/DefaultBtn"/>
 
     <!--        <TextView-->
 <!--            android:id="@+id/life_cycle"-->

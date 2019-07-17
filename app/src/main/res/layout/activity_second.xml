@@ -31,9 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cityInput"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/large_margin"
         android:text="@string/submit"
-        android:padding="@dimen/default_padding"/>
+        style="@style/rounded_btn"/>
 
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 <resources>
 <!--    auxiliary strings -->
-    <string name="app_name">Погода</string>
+    <string name="app_name">Weather</string>
     <string name="restart">onRestart()</string>
     <string name="resume">onResume()</string>
     <string name="create">onCreate()</string>
@@ -12,21 +12,20 @@
     <string name="click">onClick()</string>
 
 <!--    main strings-->
-    <string name="weatherIn">"Погода в %1$s, %2$s</string>
-    <string name="weatherInPrep">"Погода во %1$s, %2$s</string>
+    <string name="weatherIn">"Weather in %1$s, %2$s</string>
     <string name="cityName">city_name</string>
 
 <!--    fillers-->
-    <string name="defaultCity">Москве</string>
+    <string name="defaultCity">Moscow</string>
     <string name="temperatureFiller">+27°</string>
-    <string name="defaultCountry">Россия</string>
+    <string name="defaultCountry">Russia</string>
 
 <!--    button strings-->
-    <string name="changeCity">Другой город</string>
-    <string name="submit">Принять</string>
+    <string name="changeCity">Settings</string>
+    <string name="submit">Submit</string>
 
 <!--    input hints-->
-    <string name="countryHint">Страна</string>
-    <string name="cityHint">Город</string>
+    <string name="countryHint">Country</string>
+    <string name="cityHint">City</string>
 
 </resources>

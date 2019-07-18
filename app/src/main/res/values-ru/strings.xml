@@ -11,6 +11,11 @@
     <string name="start">onStart()</string>
     <string name="lifecycle">lifeCycle</string>
     <string name="click">onClick()</string>
+    <string name="attach">onAttach()</string>
+    <string name="create_view">onCreateView()</string>
+    <string name="activity_created">onActivityCreated()</string>
+    <string name="destroy_view">onDestroyView()</string>
+    <string name="detach">onDetach()</string>
 
     <!--    main strings-->
     <string name="weatherIn">"Погода в %1$s, %2$s</string>

@@ -15,6 +15,7 @@
     <string name="activity_created">onActivityCreated()</string>
     <string name="destroy_view">onDestroyView()</string>
     <string name="detach">onDetach()</string>
+    <string name="empty"> </string>
 
 <!--    main strings-->
     <string name="weatherIn">"Weather in %1$s, %2$s</string>
@@ -28,9 +29,20 @@
 <!--    button strings-->
     <string name="changeCity">Settings</string>
     <string name="submit">Submit</string>
+    <string name="cities">Cities</string>
 
 <!--    input hints-->
     <string name="countryHint">Country</string>
     <string name="cityHint">City</string>
+
+
+    <!--    arrays-->
+    <string-array name="cities_array">
+        <item>Moscow</item>
+        <item>Saint-Petersburg</item>
+        <item>Yekaterinburg</item>
+        <item>Novosibirsk</item>
+        <item>Samara</item>
+    </string-array>
 
 </resources>

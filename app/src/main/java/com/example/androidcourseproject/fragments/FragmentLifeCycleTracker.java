@@ -81,4 +81,16 @@ public abstract class FragmentLifeCycleTracker extends Fragment {
         Log.i(observedClass, getString(R.string.destroy_view));
         super.onDestroyView();
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(observedClass, "onSaveInstanceState");
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        Log.i(observedClass, "onViewStateRestored");
+    }
 }

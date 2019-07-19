@@ -1,23 +1,32 @@
 package com.example.androidcourseproject;
 
 import androidx.annotation.NonNull;
+import androidx.core.os.ConfigurationCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.androidcourseproject.fragments.CitiesList;
 import com.example.androidcourseproject.fragments.WeatherCard;
 import com.example.androidcourseproject.grammar.RussianLangTools;
 import com.example.androidcourseproject.model.GeoData;
 
+import java.util.Locale;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+    public static final int INPUT_FORM_CODE = 1;
+    public static final int CITIES_LIST_CODE = 2;
+
+
     private String country, city;
     WeatherCard weatherCard;
 
@@ -25,13 +34,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (country == null && city == null) {
             country = getString(R.string.defaultCountry);
             city = getString(R.string.defaultCity);
         }
-
-
 
         setContentView(R.layout.activity_main);
 
@@ -40,11 +46,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ft.replace(R.id.card_frame, weatherCard);
         ft.commit();
 
-
         Log.i("lifeCycle", getString(R.string.create));
 
         Button changeCityBtn = findViewById(R.id.changeCityBtn);
         changeCityBtn.setOnClickListener(this);
+
+        Button cityListBtn = findViewById(R.id.cityListBtn);
+        cityListBtn.setOnClickListener(this);
 
     }
 
@@ -53,11 +61,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.changeCityBtn:
                 Intent intent = new Intent(this, SecondActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, INPUT_FORM_CODE);
                 break;
 
             case R.id.cityListBtn:
-//                Intent intent = new Intent(this, )
+                Intent intentList = new Intent(this, CitiesListActivity.class);
+                intentList.putExtra(CitiesListActivity.GEO_TAG, new GeoData(country, city));
+                startActivityForResult(intentList, CITIES_LIST_CODE);
                 break;
 
             default:
@@ -73,7 +83,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (receivedData != null) {
                     country = receivedData.getCountry();
-                    city = RussianLangTools.getPredicativeCaseForCity(country, receivedData.getCity());
+                    city = Locale.getDefault().getLanguage().equals("en") ?
+                            receivedData.getCity() : RussianLangTools.getPredicativeCaseForCity(country, receivedData.getCity());
+//                    city = receivedData.getCity();
                 }
             }
         }

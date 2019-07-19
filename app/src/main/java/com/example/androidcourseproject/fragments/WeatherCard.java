@@ -14,11 +14,19 @@ import com.example.androidcourseproject.model.GeoData;
 
 public class WeatherCard extends FragmentLifeCycleTracker {
     public static final String INPUT_GEODATA_TAG = "geodata";
+
     private static final String SAVED_DATA_TAG = "saved";
 
     private String country="", city="";
     private TextView tvGeo;
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
 
     public static WeatherCard newInstance(GeoData data) {
         Bundle bundle = new Bundle();

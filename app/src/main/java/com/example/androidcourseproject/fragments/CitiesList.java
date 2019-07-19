@@ -83,7 +83,7 @@ public class CitiesList extends ListFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("CurrentCity", currentPosition);
     }
@@ -101,7 +101,7 @@ public class CitiesList extends ListFragment {
 
             WeatherCard detail = (WeatherCard)
                     getFragmentManager().findFragmentById(R.id.weatherFrame);
-            if (detail == null || detail.getCity().equals(city)) {
+            if (detail == null || !detail.getCity().equals(city)) {
                 detail = WeatherCard.newInstance(new GeoData(country, city));
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();

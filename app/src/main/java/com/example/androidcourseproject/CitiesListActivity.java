@@ -49,4 +49,14 @@ public class CitiesListActivity extends BaseActivity implements View.OnClickList
             finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Intent intent = new Intent();
+            intent.putExtra(RETURN_TAG_FROM_INPUT, new GeoData(country, citiesList.getCity()));
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    }
 }

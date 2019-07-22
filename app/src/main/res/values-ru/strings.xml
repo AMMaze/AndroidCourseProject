@@ -11,6 +11,13 @@
     <string name="start">onStart()</string>
     <string name="lifecycle">lifeCycle</string>
     <string name="click">onClick()</string>
+    <string name="attach">onAttach()</string>
+    <string name="create_view">onCreateView()</string>
+    <string name="activity_created">onActivityCreated()</string>
+    <string name="destroy_view">onDestroyView()</string>
+    <string name="detach">onDetach()</string>
+    <string name="empty"> </string>
+
 
     <!--    main strings-->
     <string name="weatherIn">"Погода в %1$s, %2$s</string>
@@ -24,8 +31,19 @@
     <!--    button strings-->
     <string name="changeCity">Настройки</string>
     <string name="submit">Принять</string>
+    <string name="cities">Города</string>
+
 
     <!--    input hints-->
     <string name="countryHint">Страна</string>
     <string name="cityHint">Город</string>
+
+<!--    arrays-->
+    <string-array name="cities_array">
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+        <item>Екатеринбург</item>
+        <item>Новосибирск</item>
+        <item>Самара</item>
+    </string-array>
 </resources>

@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.androidcourseproject.model.LocalParcel;
+import com.example.androidcourseproject.model.GeoData;
 
 public class SecondActivity extends BaseActivity implements View.OnClickListener {
     private EditText etCountry, etCity;
@@ -39,7 +39,7 @@ public class SecondActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.submit:
                 Intent intent = new Intent();
-                intent.putExtra(RETURN_TAG_FROM_INPUT, new LocalParcel(etCountry.getText().toString(), etCity.getText().toString()));
+                intent.putExtra(RETURN_TAG_FROM_INPUT, new GeoData(etCountry.getText().toString(), etCity.getText().toString()));
                 setResult(RESULT_OK, intent);
                 finish();
             default:

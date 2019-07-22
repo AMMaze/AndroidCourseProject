@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.androidcourseproject.fragments.CitiesList;
@@ -44,6 +45,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         weatherCard = WeatherCard.newInstance(new GeoData(country, city));
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.card_frame, weatherCard);
+
+//        LinearLayout mainBuutons =
+
         ft.commit();
 
         Log.i("lifeCycle", getString(R.string.create));

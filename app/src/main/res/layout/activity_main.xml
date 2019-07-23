@@ -8,9 +8,9 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/mainLayoutBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/leaves"
         android:scaleType="centerCrop"/>
 
 

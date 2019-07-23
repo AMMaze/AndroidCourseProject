@@ -17,13 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.androidcourseproject.fragments.CitiesList;
+import com.example.androidcourseproject.fragments.LinearButtons;
 import com.example.androidcourseproject.fragments.WeatherCard;
 import com.example.androidcourseproject.grammar.RussianLangTools;
 import com.example.androidcourseproject.model.GeoData;
 
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.function.Consumer;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity {
     public static final int INPUT_FORM_CODE = 1;
     public static final int CITIES_LIST_CODE = 2;
 
@@ -46,38 +49,56 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.card_frame, weatherCard);
 
-//        LinearLayout mainBuutons =
+        ArrayList<Consumer<View>> arr = new ArrayList<>(2);
+        arr.add(this::onChangeCityBtnClick);
+        arr.add(this::onCityListBtn);
+
+        LinearButtons mainButtonsFragment = LinearButtons.newInstance(R.layout.fragment_main_buttons,
+                arr, new int[]{R.id.changeCityBtn, R.id.cityListBtn});
+
+        ft.add(R.id.mainBtns, mainButtonsFragment);
 
         ft.commit();
 
         Log.i("lifeCycle", getString(R.string.create));
 
-        Button changeCityBtn = findViewById(R.id.changeCityBtn);
-        changeCityBtn.setOnClickListener(this);
-
-        Button cityListBtn = findViewById(R.id.cityListBtn);
-        cityListBtn.setOnClickListener(this);
+//        Button changeCityBtn = findViewById(R.id.changeCityBtn);
+//        changeCityBtn.setOnClickListener(this);
+//
+//        Button cityListBtn = findViewById(R.id.cityListBtn);
+//        cityListBtn.setOnClickListener(this);
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.changeCityBtn:
-                Intent intent = new Intent(this, SecondActivity.class);
-                startActivityForResult(intent, INPUT_FORM_CODE);
-                break;
-
-            case R.id.cityListBtn:
-                Intent intentList = new Intent(this, CitiesListActivity.class);
-                intentList.putExtra(CitiesListActivity.GEO_TAG, new GeoData(country, city));
-                startActivityForResult(intentList, CITIES_LIST_CODE);
-                break;
-
-            default:
-                break;
-        }
+    private void onChangeCityBtnClick(View v) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivityForResult(intent, INPUT_FORM_CODE);
     }
+
+    private void onCityListBtn(View v) {
+        Intent intentList = new Intent(this, CitiesListActivity.class);
+        intentList.putExtra(CitiesListActivity.GEO_TAG, new GeoData(country, city));
+        startActivityForResult(intentList, CITIES_LIST_CODE);
+    }
+
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.changeCityBtn:
+//                Intent intent = new Intent(this, SecondActivity.class);
+//                startActivityForResult(intent, INPUT_FORM_CODE);
+//                break;
+//
+//            case R.id.cityListBtn:
+//                Intent intentList = new Intent(this, CitiesListActivity.class);
+//                intentList.putExtra(CitiesListActivity.GEO_TAG, new GeoData(country, city));
+//                startActivityForResult(intentList, CITIES_LIST_CODE);
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -89,7 +110,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     country = receivedData.getCountry();
                     city = Locale.getDefault().getLanguage().equals("en") ?
                             receivedData.getCity() : RussianLangTools.getPredicativeCaseForCity(country, receivedData.getCity());
-//                    city = receivedData.getCity();
                 }
             }
         }

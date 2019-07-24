@@ -131,8 +131,6 @@ public class MainActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
         weatherCard.setArguments(bundle);
-
-//        base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override
@@ -142,8 +140,6 @@ public class MainActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
         weatherCard.setArguments(bundle);
-
-//        base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override
@@ -153,8 +149,6 @@ public class MainActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
         weatherCard.setArguments(bundle);
-
-//        base.setText(getString(R.string.weatherIn, city, country));
     }
 
     @Override

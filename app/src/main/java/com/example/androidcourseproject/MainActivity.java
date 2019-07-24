@@ -1,6 +1,8 @@
 package com.example.androidcourseproject;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -8,7 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.ViewSwitcher;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
 import com.example.androidcourseproject.fragments.main.WeatherCard;
@@ -24,6 +30,9 @@ public class MainActivity extends BaseActivity {
 
     private String country, city;
     WeatherCard weatherCard;
+    LinearButtons mainButtonsFragment;
+    ImageView background;
+    Animation fadeOutAndHide, fadeInAndShow;
 
     public String getCountry() {
         return country;
@@ -31,6 +40,26 @@ public class MainActivity extends BaseActivity {
 
     public String getCity() {
         return city;
+    }
+
+    public WeatherCard getWeatherCard() {
+        return weatherCard;
+    }
+
+    public LinearButtons getMainButtonsFragment() {
+        return mainButtonsFragment;
+    }
+
+    public ImageView getBackground() {
+        return background;
+    }
+
+    public Animation getFadeOutAndHide() {
+        return fadeOutAndHide;
+    }
+
+    public Animation getFadeInAndShow() {
+        return fadeInAndShow;
     }
 
     @Override
@@ -55,15 +84,62 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.card_frame, weatherCard);
 
-        LinearButtons mainButtonsFragment = LinearButtons.newInstance(R.layout.fragment_main_buttons,
-                new LinearButtons.SerializableConsumer[] {MainActivity::onChangeCityBtnClick, MainActivity::onCityListBtn}, new int[]{R.id.changeCityBtn, R.id.cityListBtn});
+        mainButtonsFragment = LinearButtons.newInstance(R.layout.fragment_main_buttons,
+                new LinearButtons.SerializableConsumer[] {MainActivity::onChangeCityBtnClick, MainActivity::onCityListBtn},
+                new int[]{R.id.changeCityBtn, R.id.cityListBtn});
 
         ft.add(R.id.mainBtns, mainButtonsFragment);
 
         ft.commit();
 
-        ImageView iv = findViewById(R.id.mainLayoutBG);
-        iv.setImageDrawable(getDrawable(R.drawable.leaves));
+        background = findViewById(R.id.mainLayoutBG);
+        background.setImageDrawable(getDrawable(R.drawable.leaves));
+
+        fadeOutAndHide = new AlphaAnimation(1, 0);
+        fadeOutAndHide.setInterpolator(new AccelerateInterpolator());
+        fadeOutAndHide.setDuration(600);
+        fadeOutAndHide.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                background.setVisibility(View.GONE);
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {}
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+
+        fadeInAndShow = new AlphaAnimation(0, 1);
+        fadeInAndShow.setInterpolator(new AccelerateInterpolator());
+        fadeInAndShow.setDuration(600);
+        fadeInAndShow.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                background.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {}
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+    }
+
+    private static void hideMainLayout(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.hide(activity.getWeatherCard());
+        ft.hide(activity.getMainButtonsFragment());
+        ft.commit();
+        activity.getBackground().startAnimation(activity.getFadeOutAndHide());
+    }
+
+    private static void showMainLayout(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.show(activity.getWeatherCard());
+        ft.show(activity.getMainButtonsFragment());
+        ft.commit();
+        activity.getBackground().startAnimation(activity.getFadeInAndShow());
     }
 
     /**
@@ -72,8 +148,9 @@ public class MainActivity extends BaseActivity {
      */
     private static void onChangeCityBtnClick(View v) {
         Activity activity = LinearButtons.getActivityFromView(v);
-        if (activity == null)
+        if (!(activity instanceof MainActivity))
             return;
+//        hideMainLayout((MainActivity) activity);
         Intent intent = new Intent(activity, SecondActivity.class);
         activity.startActivityForResult(intent, INPUT_FORM_CODE);
     }

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
-import com.example.androidcourseproject.fragments.WeatherCard;
+import com.example.androidcourseproject.fragments.main.WeatherCard;
 import com.example.androidcourseproject.grammar.RussianLangTools;
 import com.example.androidcourseproject.model.GeoData;
 
@@ -128,18 +128,18 @@ public class MainActivity extends BaseActivity {
     protected void onRestart() {
         super.onRestart();
         Log.i(getString(R.string.lifecycle), getString(R.string.restart));
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
-        weatherCard.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
+//        weatherCard.setArguments(bundle);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.i(getString(R.string.lifecycle), getString(R.string.start));
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
-        weatherCard.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
+//        weatherCard.setArguments(bundle);
     }
 
     @Override

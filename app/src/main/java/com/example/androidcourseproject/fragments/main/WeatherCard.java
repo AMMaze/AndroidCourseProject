@@ -1,4 +1,4 @@
-package com.example.androidcourseproject.fragments;
+package com.example.androidcourseproject.fragments.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.androidcourseproject.R;
+import com.example.androidcourseproject.fragments.FragmentLifeCycleTracker;
 import com.example.androidcourseproject.model.GeoData;
 
 public class WeatherCard extends FragmentLifeCycleTracker {

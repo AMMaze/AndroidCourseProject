@@ -1,6 +1,5 @@
 package com.example.androidcourseproject.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
 
-import com.example.androidcourseproject.BaseActivity;
 import com.example.androidcourseproject.CitiesListActivity;
-import com.example.androidcourseproject.MainActivity;
 import com.example.androidcourseproject.R;
+import com.example.androidcourseproject.fragments.main.WeatherCard;
 import com.example.androidcourseproject.model.GeoData;
 
 public class CitiesList extends ListFragment {

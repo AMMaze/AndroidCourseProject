@@ -12,38 +12,39 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/countryInput"
-            android:hint="@string/countryHint"
-            android:gravity="center"
-            android:inputType="textCapWords"/>
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/countryInput"-->
+<!--            android:hint="@string/countryHint"-->
+<!--            android:gravity="center"-->
+<!--            android:inputType="textCapWords"/>-->
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cityInput"
-            android:layout_marginTop="@dimen/large_margin"
-            android:hint="@string/cityHint"
-            android:gravity="center"
-            android:inputType="textCapWords"/>
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/cityInput"-->
+<!--            android:layout_marginTop="@dimen/large_margin"-->
+<!--            android:hint="@string/cityHint"-->
+<!--            android:gravity="center"-->
+<!--            android:inputType="textCapWords"/>-->
 
     </FrameLayout>
 
 
     <FrameLayout
+        android:id="@+id/submitBtnFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textInputFrame"
         android:layout_centerHorizontal="true">
 
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/submit"
-            style="@style/RoundedBtn"/>
+<!--        <Button-->
+<!--            android:id="@+id/submit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/submit"-->
+<!--            style="@style/RoundedBtn"/>-->
 
     </FrameLayout>
 

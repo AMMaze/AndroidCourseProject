@@ -34,6 +34,10 @@
     <string name="cities">Города</string>
 
 
+    <!--    pop-ups-->
+    <string name="emptyCountryWarning">Введите страну</string>
+    <string name="emptyCityWarning">Введите город</string>
+
     <!--    input hints-->
     <string name="countryHint">Страна</string>
     <string name="cityHint">Город</string>

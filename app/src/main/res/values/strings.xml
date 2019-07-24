@@ -35,7 +35,9 @@
     <string name="countryHint">Country</string>
     <string name="cityHint">City</string>
 
-
+<!--    pop-ups-->
+    <string name="emptyCountryWarning">Enter country</string>
+    <string name="emptyCityWarning">Enter city</string>
     <!--    arrays-->
     <string-array name="cities_array">
         <item>Moscow</item>

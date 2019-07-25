@@ -5,34 +5,19 @@
     android:id="@+id/secondMain"
     android:padding="@dimen/Large_margin">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/countryInput"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/countryHint"
-        android:gravity="center"/>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/textInputFrame"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerHorizontal="true"/>-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cityInput"
-        android:layout_below="@id/countryInput"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/cityHint"
-        android:gravity="center"/>
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cityInput"
-        android:layout_centerHorizontal="true"
-        android:text="@string/submit"
-        style="@style/RoundedBtn"/>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/submitBtnFrame"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/textInputFrame"-->
+<!--        android:layout_centerHorizontal="true"/>-->
 
 
 </RelativeLayout>

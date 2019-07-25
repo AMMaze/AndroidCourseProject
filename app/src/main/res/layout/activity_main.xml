@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/mainLayoutBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/leaves"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
 
     <FrameLayout
@@ -25,31 +25,58 @@
         app:layout_constraintVertical_bias="@dimen/ConstrVBias"
         />
 
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/mainBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+<!--second layout-->
+<!--    <FrameLayout-->
+<!--        android:id="@+id/textInputFrame"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.2"/>-->
+
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/submitBtnFrame"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/textInputFrame"-->
+<!--        android:layout_centerHorizontal="true">-->
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/secondMain"
+        android:padding="@dimen/Large_margin">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <FrameLayout
+            android:id="@+id/textInputFrame"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/changeCityBtn"
-            android:text="@string/changeCity"
-            style="@style/DefaultBtn"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <FrameLayout
+            android:id="@+id/submitBtnFrame"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cityListBtn"
-            android:text="@string/cities"
-            style="@style/DefaultBtn"/>
-    </LinearLayout>
+            android:layout_below="@+id/textInputFrame"
+            android:layout_centerHorizontal="true"/>
 
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

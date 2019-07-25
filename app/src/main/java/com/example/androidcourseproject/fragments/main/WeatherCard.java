@@ -1,4 +1,4 @@
-package com.example.androidcourseproject.fragments;
+package com.example.androidcourseproject.fragments.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.androidcourseproject.R;
+import com.example.androidcourseproject.fragments.FragmentLifeCycleTracker;
 import com.example.androidcourseproject.model.GeoData;
 
 public class WeatherCard extends FragmentLifeCycleTracker {
@@ -39,8 +40,8 @@ public class WeatherCard extends FragmentLifeCycleTracker {
     }
 
     private void readGeoData(Bundle bundle) {
-        if (bundle != null) {
-            GeoData data = bundle.getParcelable(INPUT_GEODATA_TAG);
+        GeoData data = bundle == null ? null : bundle.getParcelable(INPUT_GEODATA_TAG);
+        if (data != null) {
             country = data.getCountry();
             city = data.getCity();
         }
@@ -84,6 +85,14 @@ public class WeatherCard extends FragmentLifeCycleTracker {
         if (parcel != null) {
             country = parcel.getCountry();
             city = parcel.getCity();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (isVisible()) {
+            readGeoData(getArguments());
+            tvGeo.setText(getString(R.string.weatherIn, city, country));
         }
     }
 }

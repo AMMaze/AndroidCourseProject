@@ -282,6 +282,15 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isSecondVisible) {
+            hideSecondLayout(this);
+            showMainLayout(this);
+        } else
+            super.onBackPressed();
+    }
+
     /*
         Second activity
      */

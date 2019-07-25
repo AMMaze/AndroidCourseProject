@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -344,6 +346,7 @@ public class MainActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
                 mainActivity.getWeatherCard().setArguments(bundle);
+                hideKeyboard(mainActivity);
                 hideSecondLayout(mainActivity);
                 showMainLayout(mainActivity);
             default:
@@ -351,6 +354,14 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     
 
 }

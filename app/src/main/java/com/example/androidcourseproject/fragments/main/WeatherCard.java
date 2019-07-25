@@ -40,8 +40,8 @@ public class WeatherCard extends FragmentLifeCycleTracker {
     }
 
     private void readGeoData(Bundle bundle) {
-        if (bundle != null) {
-            GeoData data = bundle.getParcelable(INPUT_GEODATA_TAG);
+        GeoData data = bundle == null ? null : bundle.getParcelable(INPUT_GEODATA_TAG);
+        if (data != null) {
             country = data.getCountry();
             city = data.getCity();
         }
@@ -85,6 +85,14 @@ public class WeatherCard extends FragmentLifeCycleTracker {
         if (parcel != null) {
             country = parcel.getCountry();
             city = parcel.getCity();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (isVisible()) {
+            readGeoData(getArguments());
+            tvGeo.setText(getString(R.string.weatherIn, city, country));
         }
     }
 }

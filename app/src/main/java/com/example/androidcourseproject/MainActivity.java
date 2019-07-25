@@ -13,11 +13,14 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
 import com.example.androidcourseproject.fragments.main.WeatherCard;
+import com.example.androidcourseproject.fragments.settings.CCInputFields;
 import com.example.androidcourseproject.grammar.RussianLangTools;
 import com.example.androidcourseproject.model.GeoData;
 
@@ -27,12 +30,24 @@ public class MainActivity extends BaseActivity {
     public static final int INPUT_FORM_CODE = 1;
     public static final int CITIES_LIST_CODE = 2;
 
-
+//MainActivity
     private String country, city;
-    WeatherCard weatherCard;
-    LinearButtons mainButtonsFragment;
-    ImageView background;
-    Animation fadeOutAndHide, fadeInAndShow;
+    private WeatherCard weatherCard;
+    private LinearButtons mainButtonsFragment;
+    private ImageView background;
+    private Animation fadeOutAndHide, fadeInAndShow;
+
+//    SecondActivity
+    private CCInputFields inputfields;
+    private LinearButtons submitBtn;
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getCountry() {
         return country;
@@ -62,6 +77,14 @@ public class MainActivity extends BaseActivity {
         return fadeInAndShow;
     }
 
+    public CCInputFields getInputfields() {
+        return inputfields;
+    }
+
+    public LinearButtons getSubmitBtn() {
+        return submitBtn;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +95,7 @@ public class MainActivity extends BaseActivity {
         }
 
         drawMainLayout();
-
+        drawSecondLayout();
         Log.i("lifeCycle", getString(R.string.create));
 
     }
@@ -150,9 +173,10 @@ public class MainActivity extends BaseActivity {
         Activity activity = LinearButtons.getActivityFromView(v);
         if (!(activity instanceof MainActivity))
             return;
-//        hideMainLayout((MainActivity) activity);
-        Intent intent = new Intent(activity, SecondActivity.class);
-        activity.startActivityForResult(intent, INPUT_FORM_CODE);
+        hideMainLayout((MainActivity) activity);
+        showSecondLayout((MainActivity) activity);
+//        Intent intent = new Intent(activity, SecondActivity.class);
+//        activity.startActivityForResult(intent, INPUT_FORM_CODE);
     }
 
     /**
@@ -170,20 +194,20 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getExtras() != null) {
-                GeoData receivedData = (GeoData) data.getExtras().get(RETURN_TAG_FROM_INPUT);
-
-                if (receivedData != null) {
-                    country = receivedData.getCountry();
-                    city = Locale.getDefault().getLanguage().equals("en") ?
-                            receivedData.getCity() : RussianLangTools.getPredicativeCaseForCity(country, receivedData.getCity());
-                }
-            }
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (data != null && data.getExtras() != null) {
+//                GeoData receivedData = (GeoData) data.getExtras().get(RETURN_TAG_FROM_INPUT);
+//
+//                if (receivedData != null) {
+//                    country = receivedData.getCountry();
+//                    city = Locale.getDefault().getLanguage().equals("en") ?
+//                            receivedData.getCity() : RussianLangTools.getPredicativeCaseForCity(country, receivedData.getCity());
+//                }
+//            }
+//        }
+//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -244,6 +268,73 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         Log.i(getString(R.string.lifecycle), getString(R.string.destroy));
         super.onDestroy();
+    }
+
+    /*
+        Second activity
+     */
+
+    public void drawSecondLayout(){
+        inputfields = new CCInputFields();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.textInputFrame, inputfields);
+        ft.hide(inputfields);
+
+        submitBtn = LinearButtons.newInstance(R.layout.fragment_submit_button,
+                new LinearButtons.SerializableConsumer[] {MainActivity::onSubmitClick},  new int[] {R.id.submit});
+        ft.add(R.id.submitBtnFrame, submitBtn);
+        ft.hide(submitBtn);
+        ft.commit();
+    }
+
+    private static void hideSecondLayout(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.hide(activity.getInputfields());
+        ft.hide(activity.getSubmitBtn());
+        ft.commit();
+    }
+
+    private static void showSecondLayout(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.show(activity.getInputfields());
+        ft.show(activity.getSubmitBtn());
+        ft.commit();
+    }
+
+    public static void onSubmitClick(View v) {
+        Activity activity = LinearButtons.getActivityFromView(v);
+        if (!(activity instanceof MainActivity))
+            return;
+        MainActivity mainActivity = (MainActivity) activity;
+        EditText etCountry = mainActivity.findViewById(R.id.countryInput);
+        EditText etCity = mainActivity.findViewById(R.id.cityInput);
+        String country = etCountry.getText().toString();
+        String  city = etCity.getText().toString();
+        if (country.equals("")){
+            Toast.makeText(mainActivity, "Введите страну", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (city.equals("")){
+            Toast.makeText(mainActivity, "Введите город", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        switch (v.getId()) {
+            case R.id.submit:
+                mainActivity.setCountry(country);
+                mainActivity.setCity(Locale.getDefault().getLanguage().equals("en") ?
+                        city : RussianLangTools.getPredicativeCaseForCity(country, city));
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
+                mainActivity.getWeatherCard().setArguments(bundle);
+                hideSecondLayout(mainActivity);
+                showMainLayout(mainActivity);
+            default:
+                break;
+        }
     }
 
 }

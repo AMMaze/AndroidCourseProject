@@ -1,8 +1,6 @@
 package com.example.androidcourseproject;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -16,7 +14,6 @@ import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
 import com.example.androidcourseproject.fragments.main.WeatherCard;
@@ -29,6 +26,8 @@ import java.util.Locale;
 public class MainActivity extends BaseActivity {
     public static final int INPUT_FORM_CODE = 1;
     public static final int CITIES_LIST_CODE = 2;
+    private static boolean isMainVisible = true;
+    public static boolean isSecondVisible = false;
 
 //MainActivity
     private String country, city;
@@ -38,7 +37,7 @@ public class MainActivity extends BaseActivity {
     private Animation fadeOutAndHide, fadeInAndShow;
 
 //    SecondActivity
-    private CCInputFields inputfields;
+    private CCInputFields inputFields;
     private LinearButtons submitBtn;
 
     public void setCountry(String country) {
@@ -77,8 +76,8 @@ public class MainActivity extends BaseActivity {
         return fadeInAndShow;
     }
 
-    public CCInputFields getInputfields() {
-        return inputfields;
+    public CCInputFields getInputFields() {
+        return inputFields;
     }
 
     public LinearButtons getSubmitBtn() {
@@ -93,14 +92,15 @@ public class MainActivity extends BaseActivity {
             country = getString(R.string.defaultCountry);
             city = getString(R.string.defaultCity);
         }
-
-        drawMainLayout();
-        drawSecondLayout();
+        if (savedInstanceState == null){
+            drawMainLayout(!isMainVisible);
+        drawSecondLayout(!isSecondVisible);
+        }
         Log.i("lifeCycle", getString(R.string.create));
 
     }
 
-    private void drawMainLayout() {
+    private void drawMainLayout(boolean hidden) {
         setContentView(R.layout.activity_main);
 
         weatherCard = WeatherCard.newInstance(new GeoData(country, city));
@@ -112,11 +112,18 @@ public class MainActivity extends BaseActivity {
                 new int[]{R.id.changeCityBtn, R.id.cityListBtn});
 
         ft.add(R.id.mainBtns, mainButtonsFragment);
+        if (hidden) {
+            ft.hide(weatherCard);
+            ft.hide(mainButtonsFragment);
+        }
 
         ft.commit();
 
         background = findViewById(R.id.mainLayoutBG);
         background.setImageDrawable(getDrawable(R.drawable.leaves));
+        if (hidden) {
+            background.setVisibility(View.GONE);
+        }
 
         fadeOutAndHide = new AlphaAnimation(1, 0);
         fadeOutAndHide.setInterpolator(new AccelerateInterpolator());
@@ -145,6 +152,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onAnimationRepeat(Animation animation) {}
         });
+
     }
 
     private static void hideMainLayout(MainActivity activity) {
@@ -154,6 +162,7 @@ public class MainActivity extends BaseActivity {
         ft.hide(activity.getMainButtonsFragment());
         ft.commit();
         activity.getBackground().startAnimation(activity.getFadeOutAndHide());
+        isMainVisible = false;
     }
 
     private static void showMainLayout(MainActivity activity) {
@@ -163,6 +172,7 @@ public class MainActivity extends BaseActivity {
         ft.show(activity.getMainButtonsFragment());
         ft.commit();
         activity.getBackground().startAnimation(activity.getFadeInAndShow());
+        isMainVisible = true;
     }
 
     /**
@@ -274,33 +284,37 @@ public class MainActivity extends BaseActivity {
         Second activity
      */
 
-    public void drawSecondLayout(){
-        inputfields = new CCInputFields();
+    public void drawSecondLayout(boolean hidden){
+        inputFields = new CCInputFields();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.textInputFrame, inputfields);
-        ft.hide(inputfields);
+        ft.add(R.id.textInputFrame, inputFields);
 
         submitBtn = LinearButtons.newInstance(R.layout.fragment_submit_button,
                 new LinearButtons.SerializableConsumer[] {MainActivity::onSubmitClick},  new int[] {R.id.submit});
         ft.add(R.id.submitBtnFrame, submitBtn);
-        ft.hide(submitBtn);
+        if (hidden) {
+            ft.hide(inputFields);
+            ft.hide(submitBtn);
+        }
         ft.commit();
     }
 
     private static void hideSecondLayout(MainActivity activity) {
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-        ft.hide(activity.getInputfields());
+        ft.hide(activity.getInputFields());
         ft.hide(activity.getSubmitBtn());
         ft.commit();
+        isSecondVisible = false;
     }
 
     private static void showSecondLayout(MainActivity activity) {
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-        ft.show(activity.getInputfields());
+        ft.show(activity.getInputFields());
         ft.show(activity.getSubmitBtn());
         ft.commit();
+        isSecondVisible = true;
     }
 
     public static void onSubmitClick(View v) {
@@ -311,7 +325,7 @@ public class MainActivity extends BaseActivity {
         EditText etCountry = mainActivity.findViewById(R.id.countryInput);
         EditText etCity = mainActivity.findViewById(R.id.cityInput);
         String country = etCountry.getText().toString();
-        String  city = etCity.getText().toString();
+        String city = etCity.getText().toString();
         if (country.equals("")){
             Toast.makeText(mainActivity, "Введите страну", Toast.LENGTH_SHORT).show();
             return;
@@ -336,5 +350,7 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
+    
 
 }

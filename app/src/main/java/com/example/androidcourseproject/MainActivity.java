@@ -11,14 +11,13 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
-import com.example.androidcourseproject.fragments.WeatherHistory;
+import com.example.androidcourseproject.fragments.history.WeatherHistory;
 import com.example.androidcourseproject.fragments.main.WeatherCard;
 import com.example.androidcourseproject.fragments.settings.CCInputFields;
 import com.example.androidcourseproject.grammar.RussianLangTools;

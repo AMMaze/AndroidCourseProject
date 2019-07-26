@@ -35,6 +35,9 @@
     <string name="countryHint">Country</string>
     <string name="cityHint">City</string>
 
+<!--    special characters-->
+    <string name="celsius">°</string>
+
 <!--    pop-ups-->
     <string name="emptyCountryWarning">Enter country</string>
     <string name="emptyCityWarning">Enter city</string>
@@ -46,5 +49,21 @@
         <item>Novosibirsk</item>
         <item>Samara</item>
     </string-array>
+
+    <string-array name="filler_temps">
+        <item>+27°</item>
+        <item>+20°</item>
+        <item>+10°</item>
+        <item>+18°</item>
+        <item>+9°</item>
+    </string-array>
+
+    <array name="icons">
+        <item>@drawable/ic_sun_sunny_temperature_weather_icon</item>
+        <item>@drawable/ic_clouds_cloudy_rain_sunny_weather_icon</item>
+        <item>@drawable/ic_clouds_sun_sunny_weather_icon</item>
+        <item>@drawable/ic_sun_sunny_temperature_weather_icon</item>
+        <item>@drawable/ic_cloud_clouds_cloudy_weather_icon</item>
+    </array>
 
 </resources>

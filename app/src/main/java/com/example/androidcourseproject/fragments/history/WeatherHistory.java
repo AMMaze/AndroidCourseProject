@@ -1,4 +1,4 @@
-package com.example.androidcourseproject.fragments;
+package com.example.androidcourseproject.fragments.history;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidcourseproject.R;
+import com.example.androidcourseproject.adapters.DataSourceBuilder;
 import com.example.androidcourseproject.adapters.WeatherHistoryAdapter;
+import com.example.androidcourseproject.fragments.FragmentLifeCycleTracker;
 
 public class WeatherHistory extends FragmentLifeCycleTracker {
 
@@ -26,7 +28,8 @@ public class WeatherHistory extends FragmentLifeCycleTracker {
         RecyclerView recyclerView = (RecyclerView) view;
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
-        WeatherHistoryAdapter adapter = new WeatherHistoryAdapter(data);
+        DataSourceBuilder builder = new DataSourceBuilder(getResources());
+        WeatherHistoryAdapter adapter = new WeatherHistoryAdapter(builder.build());
         recyclerView.setAdapter(adapter);
         return view;
     }

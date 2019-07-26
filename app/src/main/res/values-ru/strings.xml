@@ -42,6 +42,9 @@
     <string name="countryHint">Страна</string>
     <string name="cityHint">Город</string>
 
+    <!--    special characters-->
+    <string name="celsius">°</string>
+
 <!--    arrays-->
     <string-array name="cities_array">
         <item>Москва</item>

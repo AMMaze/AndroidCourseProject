@@ -20,4 +20,12 @@
         android:text="@string/cities"
         style="@style/DefaultBtn"/>
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/weatherHistory"
+        android:text="History"
+        style="@style/DefaultBtn"/>
+
 </LinearLayout>

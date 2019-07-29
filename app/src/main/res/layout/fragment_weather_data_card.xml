@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/weather_data_card"
+    android:layout_gravity="center"
+    style="@style/CardViewStyle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/weatherMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temperatureFiller"
+            android:drawableEnd="@drawable/ic_sun_sunny_temperature_weather_icon"
+            android:layout_centerHorizontal="true"
+            style="@style/DefaultText"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

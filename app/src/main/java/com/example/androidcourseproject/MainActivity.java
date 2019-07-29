@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.androidcourseproject.fragments.LinearButtons;
+import com.example.androidcourseproject.fragments.history.WeatherHistory;
 import com.example.androidcourseproject.fragments.main.WeatherCard;
 import com.example.androidcourseproject.fragments.settings.CCInputFields;
 import com.example.androidcourseproject.grammar.RussianLangTools;
@@ -27,7 +29,8 @@ public class MainActivity extends BaseActivity {
     public static final int INPUT_FORM_CODE = 1;
     public static final int CITIES_LIST_CODE = 2;
     private static boolean isMainVisible = true;
-    public static boolean isSecondVisible = false;
+    private static boolean isSecondVisible = false;
+    private static boolean isWeatherHistoryVisible = false;
 
 //MainActivity
     private String country, city;
@@ -39,6 +42,9 @@ public class MainActivity extends BaseActivity {
 //    SecondActivity
     private CCInputFields inputFields;
     private LinearButtons submitBtn;
+
+    //WeatherHistory
+    private WeatherHistory weatherHistory;
 
     public void setCountry(String country) {
         this.country = country;
@@ -84,6 +90,10 @@ public class MainActivity extends BaseActivity {
         return submitBtn;
     }
 
+    public WeatherHistory getWeatherHistory() {
+        return weatherHistory;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +104,8 @@ public class MainActivity extends BaseActivity {
         }
         if (savedInstanceState == null){
             drawMainLayout(!isMainVisible);
-        drawSecondLayout(!isSecondVisible);
+            drawSecondLayout(!isSecondVisible);
+            drawWeatherHistory(!isWeatherHistoryVisible);
         }
         Log.i("lifeCycle", getString(R.string.create));
 
@@ -108,8 +119,8 @@ public class MainActivity extends BaseActivity {
         ft.replace(R.id.card_frame, weatherCard);
 
         mainButtonsFragment = LinearButtons.newInstance(R.layout.fragment_main_buttons,
-                new LinearButtons.SerializableConsumer[] {MainActivity::onChangeCityBtnClick, MainActivity::onCityListBtn},
-                new int[]{R.id.changeCityBtn, R.id.cityListBtn});
+                new LinearButtons.SerializableConsumer[] {MainActivity::onChangeCityBtnClick, MainActivity::onCityListBtn, MainActivity::onHistoryBtnClick},
+                new int[]{R.id.changeCityBtn, R.id.cityListBtn, R.id.weatherHistory});
 
         ft.add(R.id.mainBtns, mainButtonsFragment);
         if (hidden) {
@@ -280,6 +291,18 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isSecondVisible) {
+            hideSecondLayout(this);
+            showMainLayout(this);
+        } if (isWeatherHistoryVisible) {
+            hideWeatherHistory(this);
+            showMainLayout(this);
+        } else
+            super.onBackPressed();
+    }
+
     /*
         Second activity
      */
@@ -344,6 +367,7 @@ public class MainActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(WeatherCard.INPUT_GEODATA_TAG, new GeoData(country, city));
                 mainActivity.getWeatherCard().setArguments(bundle);
+                hideKeyboard(mainActivity);
                 hideSecondLayout(mainActivity);
                 showMainLayout(mainActivity);
             default:
@@ -351,6 +375,50 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     
 
+    /*
+        weather history list
+     */
+    public void drawWeatherHistory(boolean hidden) {
+        weatherHistory = new WeatherHistory();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.main_container, weatherHistory);
+        if (hidden) {
+            ft.hide(weatherHistory);
+        }
+        ft.commit();
+    }
+
+    public static void showWeatherHistory(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.show(activity.getWeatherHistory());
+        ft.commit();
+        isWeatherHistoryVisible = true;
+    }
+
+    public static void hideWeatherHistory(MainActivity activity) {
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.hide(activity.getWeatherHistory());
+        ft.commit();
+        isWeatherHistoryVisible = false;
+    }
+
+    public static void onHistoryBtnClick(View v) {
+        Activity activity = LinearButtons.getActivityFromView(v);
+        if (!(activity instanceof MainActivity))
+            return;
+        hideMainLayout((MainActivity) activity);
+        showWeatherHistory((MainActivity) activity);
+    }
 }
